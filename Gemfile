@@ -32,7 +32,7 @@ gem 'jquery-rails'
 #Turbolinks make navigating your web application faster. Read more: https://github.com/turbolinks/Turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~>2.5'
+gem 'jbuilder', '~> 2.5'
 
 gem 'thor', '0.19.1'
 
