@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  helper_method :user_params
 
   def new
     @user = User.new
@@ -18,5 +19,16 @@ class UsersController < ApplicationController
       flash.now[:alert] = "There was an error creating your account. Please try again."
       render :new
     end
-  end 
+  end
+
+  def confirm
+    @user = User.new(user_params[:user])
+    @user.email = user_params[:email]
+    @user.name = user_params[:name]
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
 end
