@@ -2,16 +2,18 @@
 <h3>Are you sure these values are correct?</h3>
 
 <div class="row">
-  <div class="col-md-8">
-    <%= form_for @user do |f| %>
-    <div class="form-group">
-      <%= f.label :email %>: <%= @user.email %><br>
-      <%= f.label :name %>: <%= @user.name %>
-    </div>
+  <div class="col-md-4">
+    <h5>Email: <%= @user.email %></h5>
+    <h5>Name: <%= @user.name %></h5>
+  </div>
+</div>
 
-    <div class="form-group">
-      <%= button_to "Yes", { controller: "users", action: "create", params: { user: user_params } }, class: 'btn btn-success' %>
-    </div>
-  <% end %>
+<div class="row">
+  <div class="col-md-4", style="width: auto;">
+    <%= button_to "Yes", {controller: "users", action: "create", :params => params}, class: 'btn btn-success' %>
+  </div>
+
+  <div class="col-md-4", style="width: auto;">
+    <%= button_to "No", { controller: "users", action: "new" }, class: 'btn btn-failure', :method => :get %>
   </div>
 </div>
