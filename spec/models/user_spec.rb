@@ -35,4 +35,14 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "capitalize first, middle, and last name" do
+    let(:user_with_first_middle_last) { User.create!(name: "jefferey scott dembinski", email: "jdembinski@gmail.com", password: "password") }
+    let(:user_with_first_last) { User.create!(name: "jeremy smith", email: "jsmith@gmail.com", password: "password") }
+
+    it "should capitalize the first letter in each part of name string" do
+        expect(user_with_first_middle_last).to have_attributes(name: "Jefferey Scott Dembinski")
+        expect(user_with_first_last).to have_attributes(name: "Jeremy Smith")
+    end
+  end
+
 end
