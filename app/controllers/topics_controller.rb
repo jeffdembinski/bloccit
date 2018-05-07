@@ -1,8 +1,10 @@
 class TopicsController < ApplicationController
+  include TopicsHelper
 
   before_action :require_sign_in, except: [:index, :show]
+  before_action :authorize_user, except: [:index, :show, :update]
 
-  before_action :authorize_user, except: [:index, :show]
+
 
   def index
     @topics = Topic.all
@@ -13,17 +15,27 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = Topic.new
+    if !user_is_moderator?
+      @topic = Topic.new
+    else
+      flash[:alert] = "Only members and admins can create topics."
+      redirect_to topics_path
+    end
   end
 
   def create
-    @topic = Topic.new(topic_params)
+    if !user_is_moderator?
+      @topic = Topic.new(topic_params)
 
-    if @topic.save
-      redirect_to @topic, notice: "Topic was saved successfully."
+      if @topic.save
+        redirect_to @topic, notice: "Topic was saved successfully."
+      else
+        flash.now[:alert] = "Error creating topic. Please try again."
+        render :new
+      end
     else
-      flash.now[:alert] = "Error creating topic. Please try again."
-      render :new
+      flash[:alert] = "Only members and admins can create posts."
+      redirect_to topics_path
     end
   end
 
@@ -46,13 +58,18 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic = Topic.find(params[:id])
+    if !user_is_moderator?
+      @topic = Topic.find(params[:id])
 
-    if @topic.destroy
-      flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
-      redirect_to action: :index
+      if @topic.destroy
+        flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
+        redirect_to action: :index
+      else
+        flash.now[:alert] = "There was an error deleting the topic."
+        render :show
+      end
     else
-      flash.now[:alert] = "There was an error deleting the topic."
+      flash[:alert] = "Only members and admins can destroy posts."
       render :show
     end
   end
@@ -63,10 +80,10 @@ class TopicsController < ApplicationController
   end
 
   def authorize_user
-    unless current_user.admin?
+    unless current_user.admin? || current_user.moderator?
       flash[:alert] = "You must be an admin to do that."
       redirect_to topics_path
     end
   end
-  
+
 end
