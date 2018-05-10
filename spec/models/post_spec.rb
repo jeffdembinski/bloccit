@@ -78,7 +78,15 @@ RSpec.describe Post, type: :model do
         post.votes.create!(value: -1, user: user)
         expect(post.rank).to eq (old_rank -1)
       end
-    end 
+    end
+
+    describe "creates a vote with current user" do
+
+      it "assigns the logged in user as the owner of the vote" do
+        expect(post.user).to eq(user)
+      end
+    end
+
 
   end
 end
