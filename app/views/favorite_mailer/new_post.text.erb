@@ -1,0 +1,10 @@
+New post to "<%= @post.topic.name %>"
+<%= "=" * (@post.title.length + 12) %>
+
+By: <%= @post.user.name %>
+
+<%= @post.body %>
+
+You will receive an email everytime someone comments on this post!
+
+Visit online at <%= topic_post_url(@post.topic.name, @post, anchor: "post-#{@post.id}") %>
