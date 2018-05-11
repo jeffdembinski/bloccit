@@ -56,7 +56,7 @@ admin = User.create!(
 
 member = User.create!(
   name: "Member User",
-  email: "member@example.com",
+  email: "jdembinski@gmail.com",
   password: "helloworld"
 )
 
