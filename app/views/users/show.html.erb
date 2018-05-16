@@ -28,12 +28,4 @@
 <%= any_comments?(@user) %>
 
 <h2>Favorited Posts</h2>
-<div class="media">
-  <%= image_tag current_user.avatar_url(64), class: 'mr-3' %>
-  <div class="pull-left media-body">
-    <h5 class="mt-0">Media heading</h5>
-    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-  </div>
-</div>
-
-image_tag current_user.avatar_url(64)
+<%= any_favorites?(@user) %>

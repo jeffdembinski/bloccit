@@ -10,7 +10,7 @@ module UsersHelper
 
   def any_comments?(user)
     if user.comments.count > 0
-      render user.posts
+      render user.comments
     else
       render html: tag.h4("#{user.name} has not made any comments yet.")
     end
@@ -18,7 +18,7 @@ module UsersHelper
 
   def any_favorites?(user)
     if user.favorites.count > 0
-      render user.favorites
+      render partial: 'favorites/myfavorites', user.favorites
     else
       render html: tag.h4("#{user.name} has not made any comments yet.")
     end
