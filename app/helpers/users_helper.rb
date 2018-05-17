@@ -18,7 +18,7 @@ module UsersHelper
 
   def any_favorites?(user)
     if user.favorites.count > 0
-      render partial: 'favorites/myfavorites', user.favorites
+      render partial: 'users/user_favorites', locals: {favorites: @user.favorites}
     else
       render html: tag.h4("#{user.name} has not made any comments yet.")
     end
