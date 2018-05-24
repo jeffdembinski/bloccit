@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
   before_action :require_sign_in, except: [:index, :show]
 
   before_action :authorize_user, except: [:index, :show]
+  before_action :authorize_mod, only: [:edit, :update]
 
   def index
     @topics = Topic.all
@@ -68,5 +69,5 @@ class TopicsController < ApplicationController
       redirect_to topics_path
     end
   end
-  
+
 end

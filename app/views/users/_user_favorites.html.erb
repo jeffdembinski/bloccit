@@ -2,7 +2,8 @@
 <div class="media">
   <div class="media-body">
     <h4 class="media-heading">
-      <%= link_to favorite.post.title, topic_post_path(favorite.post) %>
+      <%= favorite.post.votes.count %>
+      <%= link_to favorite.post.title, topic_post_path(favorite.post.topic, favorite.post) %>
     </h4>
   </div>
 </div>
