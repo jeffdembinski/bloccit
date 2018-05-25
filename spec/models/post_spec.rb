@@ -75,5 +75,11 @@ RSpec.describe Post, type: :model do
       end
     end
 
+    describe "creates a vote with current user" do
+
+      it "assigns the logged in user as the owner of the vote" do
+        expect(post.user).to eq(user)
+      end
+    end
   end
 end
